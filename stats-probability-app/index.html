@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadística & Probabilidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
+    </div>
+    <header>
+        <h1>WebApp Probabilidad y Estadística</h1>
+    </header>
+    <main class="container">
+        <!-- Ingreso de Datos -->
+        <section id="data-input-section">
+            <h2>Ingreso de Datos</h2>
+            <p>Ingresa los números separados por comas (mínimo 20 sugerido):</p>
+            <textarea id="dataInput" rows="4" placeholder="Ej: 10, 20, 30, 40, ..."></textarea>
+            <div class="button-group">
+                <button id="addDataBtn">Procesar Datos</button>
+                <button id="generateRandomBtn">
+                    <span id="btnText">Generar 20 Datos Aleatorios</span>
+                    <div id="spinner" class="spinner" style="display:none;"></div>
+                </button>
+                <button id="clearDataBtn" class="btn-alt">Limpiar Todo</button>
+            </div>
+            <div id="dataDisplay" style="display:none; margin-bottom: 20px;"></div>
+            <div id="menuNavContainer" style="text-align: center; display: none; margin-bottom: 40px;">
+                <button id="goToMenuBtn" class="btn-main" style="padding: 12px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    🚀 Ir al Menú de Análisis
+                </button>
+            </div>
+        </section>
+
+        <!-- Menú de Navegación de Análisis -->
+        <section id="analysis-summary" style="display:none;">
+            <div class="summary-header">
+                <h3><span class="icon-menu">☰</span> Menú de Análisis</h3>
+                <div class="summary-line"></div>
+            </div>
+            <nav class="analysis-nav">
+                <a href="#data-input-section" class="nav-item nav-home">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    </span>
+                    <span class="nav-label">Inicio</span>
+                </a>
+                <a href="#statistics-section" class="nav-item">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg>
+                    </span>
+                    <span class="nav-label">Estadística</span>
+                </a>
+                <a href="#frequency-section" class="nav-item">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"/></svg>
+                    </span>
+                    <span class="nav-label">Frecuencias</span>
+                </a>
+                <a href="#charts-section" class="nav-item">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 17.08l1.5 1.41z"/></svg>
+                    </span>
+                    <span class="nav-label">Gráficas</span>
+                </a>
+                <a href="#set-analysis-title" class="nav-item">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="5"/></svg>
+                    </span>
+                    <span class="nav-label">Operaciones con Conjuntos</span>
+                </a>
+                <a href="#prob-analysis-title" class="nav-item">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 14H6V5h12v12zM8 8h2v2H8V8zm5 0h2v2h-2V8zm-5 5h2v2H8v-2zm5 0h2v2h-2v-2z"/></svg>
+                    </span>
+                    <span class="nav-label">Regla Multiplicativa</span>
+                </a>
+                <a href="#comb-analysis-title" class="nav-item">
+                    <span class="nav-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 14H6V5h12v12zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+                    </span>
+                    <span class="nav-label">Permutaciones y Combinaciones</span>
+                </a>
+            </nav>
+        </section>
+
+        <!-- Resultados Estadísticos -->
+        <section id="statistics-section" style="display:none;">
+            <h2>Resultados Estadísticos</h2>
+            <div id="statsGrid">
+                <div class="stat-box"><strong>Media</strong> <span id="meanResult">-</span></div>
+                <div class="stat-box"><strong>Mediana</strong> <span id="medianResult">-</span></div>
+                <div class="stat-box"><strong>Moda</strong> <span id="modeResult">-</span></div>
+                <div class="stat-box"><strong>Mínimo</strong> <span id="minResult">-</span></div>
+                <div class="stat-box"><strong>Máximo</strong> <span id="maxResult">-</span></div>
+                <div class="stat-box"><strong>Rango</strong> <span id="rangeResult">-</span></div>
+            </div>
+            <div class="return-container">
+                <a href="#analysis-summary" class="btn-return">↑ Volver al Menú</a>
+            </div>
+        </section>
+
+        <!-- Tabla de Frecuencias -->
+        <section id="frequency-section" style="display:none;">
+            <h2 id="frequency-table-title">Tabla de Frecuencias</h2>
+            <table class="table" id="frequencyTable">
+                <thead>
+                    <tr>
+                        <th>Dato (x<sub>i</sub>)</th>
+                        <th>f<sub>i</sub> (Absoluta)</th>
+                        <th>f<sub>r</sub> (Relativa %)</th>
+                        <th>F<sub>i</sub> (Acumulada)</th>
+                        <th>F<sub>r</sub> (Acum. %)</th>
+                    </tr>
+                </thead>
+                <tbody id="frequencyTableBody"></tbody>
+            </table>
+            <div class="return-container">
+                <a href="#analysis-summary" class="btn-return">↑ Volver al Menú</a>
+            </div>
+        </section>
+
+        <!-- Gráficas -->
+        <section id="charts-section" style="display:none;">
+            <h2>Gráficas Estadísticas</h2>
+            <div class="charts-grid">
+                <div class="chart-wrapper">
+                    <h3 class="chart-title">Histograma</h3>
+                    <div style="height: 350px;">
+                        <canvas id="histogramChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3 class="chart-title">Polígono de Frecuencias</h3>
+                    <div style="height: 350px;">
+                        <canvas id="frequencyPolygonChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3 class="chart-title">Ojiva</h3>
+                    <div style="height: 350px;">
+                        <canvas id="ogiveChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3 class="chart-title">Diagrama de Pareto</h3>
+                    <div style="height: 350px;">
+                        <canvas id="paretoChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="return-container">
+                <a href="#analysis-summary" class="btn-return">↑ Volver al Menú</a>
+            </div>
+        </section>
+
+        <!-- Probabilidad y Conjuntos -->
+        <section id="probability-section" style="display:none;">
+            <h2 id="probability-main-title">Probabilidad y Conjuntos</h2>
+            <div class="charts-grid">
+                <!-- Conjuntos -->
+                <div class="chart-wrapper">
+                    <h3 class="chart-title" id="set-analysis-title">Operaciones con Conjuntos</h3>
+                    <div class="card-content">
+                        <p>Conjunto A: <input type="text" id="setAInput" placeholder="Ej: 1, 2, 3, 4"></p>
+                        <p>Conjunto B: <input type="text" id="setBInput" placeholder="Ej: 3, 4, 5, 6"></p>
+                        <div class="button-group">
+                            <button id="calculateSetsBtn">Calcular Conjuntos</button>
+                            <button id="clearSetsResultsBtn" class="btn-alt">Limpiar Resultados</button>
+                        </div>
+                        <div id="setResults" class="results-area"></div>
+                    </div>
+                </div>
+
+                <!-- Regla Multiplicativa -->
+                <div class="chart-wrapper">
+                    <h3 class="chart-title" id="prob-analysis-title">Regla Multiplicativa</h3>
+                    <div class="card-content">
+                        <p>P(A): <input type="number" id="probA" step="0.01" min="0" max="1" placeholder="0.5"></p>
+                        <p>P(B|A): <input type="number" id="probBgivenA" step="0.01" min="0" max="1" placeholder="0.3"></p>
+                        <div class="button-group">
+                            <button id="calculateProbBtn">Calcular P(A ∩ B)</button>
+                        </div>
+                        <div id="probResults" class="results-area"></div>
+                    </div>
+                </div>
+
+                <!-- Diagrama de Árbol -->
+                <div class="chart-wrapper">
+                    <h3 class="chart-title">Diagrama de Árbol</h3>
+                    <div id="treeDiagramArea" class="tree-container">
+                        <p class="placeholder-text">Calcula la regla multiplicativa para generar el árbol.</p>
+                    </div>
+                </div>
+
+                <!-- Combinatoria -->
+                <div class="chart-wrapper">
+                    <h3 class="chart-title" id="comb-analysis-title">Permutaciones y Combinaciones</h3>
+                    <div class="card-content">
+                        <p>Valor n (total): <input type="number" id="nValue" min="0"></p>
+                        <p>Valor r (muestra): <input type="number" id="rValue" min="0"></p>
+                        <div class="button-group">
+                            <button id="calculateCombinatoriaBtn">Calcular P & C</button>
+                        </div>
+                        <div id="combinatoriaResults" class="results-area"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="return-container">
+                <a href="#analysis-summary" class="btn-return">↑ Volver al Menú</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Alejandra CC &copy; 2026</p>
+    </footer>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

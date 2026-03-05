@@ -1,0 +1,19 @@
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+}

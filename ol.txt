@@ -1,0 +1,35 @@
+
+Desarrollar una aplicación web funcional e interactiva que permita al usuario ingresar datos, generar datos aleatorios y aplicar conceptos fundamentales de probabilidad y estadística. La aplicación debe estar publicada en **GitHub Pages** y accesible mediante una URL pública.
+
+**Requisitos técnicos:**  
+- Lenguaje de programación libre (HTML, CSS, JavaScript, frameworks o librerías).  
+- Proyecto organizado y documentado.  
+- Publicación en GitHub Pages (index.html en la raíz del repositorio).  
+
+**Funcionalidades mínimas:**  
+1. **Ingreso manual de datos numéricos** (mínimo 20).  
+2. **Generación de datos aleatorios** (mínimo 20).  
+3. **Cálculos estadísticos básicos:**  
+   - Media  
+   - Mediana  
+   - Moda  
+   - Mínimo  
+   - Máximo  
+   - Rango  
+4. **Tabla de frecuencias:**  
+   - fi (frecuencia absoluta)  
+   - fr (frecuencia relativa)  
+   - Fi (frecuencia acumulada absoluta)  
+   - Fr (frecuencia acumulada relativa)  
+5. **Representaciones gráficas:**  
+   - Histograma  
+   - Polígono de frecuencias  
+   - Ojiva  
+   - Diagrama de Pareto  
+6. **Probabilidad y conjuntos:**  
+   - Operaciones con conjuntos  
+   - Cálculo de probabilidades  
+   - Regla multiplicativa y diagrama de árbol  
+   - Permutaciones y combinaciones  
+
+
